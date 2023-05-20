@@ -19,8 +19,8 @@ byCol = True
 # number of columns in each row / num of rows in each column
 colRowNum = 5
 # margin between each image on the spritesheet
-imageXMargin = 0
-imageYMargin = 0
+imageXMargin = 10
+imageYMargin = 10
 #========================================
 
 # checks if the directories exist
@@ -49,9 +49,9 @@ def layerImages():
     images.sort(key=getNum)
     try:
         if(byCol):
-            spriteSheet = Image.new("RGBA",(colRowNum*(imageDim[0]+imageXMargin),(int(len(images)/colRowNum))*(imageDim[1]+imageYMargin)))
+            spriteSheet = Image.new("RGBA",(colRowNum*(imageDim[0]+imageXMargin)+imageXMargin,(int(len(images)/colRowNum))*(imageDim[1]+imageYMargin)+imageYMargin))
         else:
-            spriteSheet = Image.new("RGBA",((int(len(images)/colRowNum))*(imageDim[1]+imageXMargin),colRowNum*(imageDim[0]+imageYMargin)))
+            spriteSheet = Image.new("RGBA",((int(len(images)/colRowNum))*(imageDim[1]+imageXMargin)+imageXMargin,colRowNum*(imageDim[0]+imageYMargin)+imageYMargin))
     except Exception as e:
         print("Error while creating image.")
         print(e)
@@ -64,10 +64,18 @@ def layerImages():
                 try:
                     img = Image.open(imageDir + image)
                     img = resizeImage(img)
+
+                    offSetX = 0
+                    offSetY = 0
+                    if((i)%colRowNum == 0):
+                        offSetX = imageXMargin
+                    if(int((i)/colRowNum) == 0):
+                        offSetY = imageYMargin
                     if(byCol):
-                        spriteSheet.paste(img, ((((i)%colRowNum)*(imageDim[0]+imageXMargin),int((i)/colRowNum)*(imageDim[1]+imageYMargin))),img)
+                        
+                        spriteSheet.paste(img, (((i%colRowNum)*(imageDim[0]+imageXMargin)+imageXMargin,int(i/colRowNum)*(imageDim[1]+imageYMargin)+imageYMargin)),img)
                     else:
-                        spriteSheet.paste(img, (((int((i)/colRowNum)*(imageDim[1]+imageXMargin),(i%colRowNum)*(imageDim[0]+imageYMargin)))),img)
+                        spriteSheet.paste(img, (int(i/colRowNum)*(imageDim[1]+imageXMargin)+imageXMargin,(i%colRowNum)*(imageDim[0]+imageYMargin)+imageYMargin),img)
                 except Exception as e:
                     print("Error while reading images.")
                     print(e)
