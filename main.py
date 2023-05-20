@@ -64,13 +64,7 @@ def layerImages():
                 try:
                     img = Image.open(imageDir + image)
                     img = resizeImage(img)
-
-                    offSetX = 0
-                    offSetY = 0
-                    if((i)%colRowNum == 0):
-                        offSetX = imageXMargin
-                    if(int((i)/colRowNum) == 0):
-                        offSetY = imageYMargin
+                    
                     if(byCol):
                         
                         spriteSheet.paste(img, (((i%colRowNum)*(imageDim[0]+imageXMargin)+imageXMargin,int(i/colRowNum)*(imageDim[1]+imageYMargin)+imageYMargin)),img)
