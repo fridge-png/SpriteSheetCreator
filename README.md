@@ -1,4 +1,4 @@
-#Sprite Sheet Creator
+# Sprite Sheet Creator
 Creates sprite sheet image from a sequence of images
 
 
