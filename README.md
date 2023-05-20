@@ -1,6 +1,7 @@
 # Sprite Sheet Creator
 Creates sprite sheet image from a sequence of images
 
+Make sure to change the parameters at the top in the code.
 
 ## Final Spritesheet
 ### Spritesheet by column
